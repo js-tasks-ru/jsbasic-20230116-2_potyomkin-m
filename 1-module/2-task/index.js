@@ -7,10 +7,30 @@ function print(text) {
 
 /**
  * Эту функцию нужно поменять так,
- * чтобы функция sayHello работала корректно
+ * чтобы функция sayHello работала корректно.
+ * Имя не пустое, без пробелов, минимум 4 символа.
  */
 function isValid(name) {
-  // ваш код...
+  
+  // let result;
+  // if (name) {
+  //   if (name.length >= 4) {
+  //     if (!name.includes(' ')) {
+  //       result = true;
+  //     }
+  //     else {
+  //       result = false;
+  //     }
+  //   } else {
+  //     result = false;
+  //   }
+  // } else {
+  //   result = false;
+  // }
+
+  let result = name != null && name.length >= 4 && !name.includes(' ');
+
+  return result;
 }
 
 function sayHello() {
