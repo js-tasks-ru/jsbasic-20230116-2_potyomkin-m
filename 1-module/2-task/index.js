@@ -11,26 +11,13 @@ function print(text) {
  * Имя не пустое, без пробелов, минимум 4 символа.
  */
 function isValid(name) {
-  
-  // let result;
-  // if (name) {
-  //   if (name.length >= 4) {
-  //     if (!name.includes(' ')) {
-  //       result = true;
-  //     }
-  //     else {
-  //       result = false;
-  //     }
-  //   } else {
-  //     result = false;
-  //   }
-  // } else {
-  //   result = false;
-  // }
 
-  let result = name != null && name.length >= 4 && !name.includes(' ');
+  if (name && !name.includes(' ') && name.length >= 4) {
+    return true;
+  } else {
+    return false;
+  }
 
-  return result;
 }
 
 function sayHello() {
