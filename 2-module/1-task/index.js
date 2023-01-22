@@ -3,11 +3,10 @@ function sumSalary(salaries) {
 
   for (key in salaries) {
     if ((typeof (salaries[key]) === 'number') && !isNaN(salaries[key]) && (salaries[key] !== Infinity) && (salaries[key] !== -Infinity)) {
-      console.log(salaries[key]);
       summ += salaries[key];
     }
   }
-  
+
   return summ;
 
 }
