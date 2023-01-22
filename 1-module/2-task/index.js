@@ -19,6 +19,8 @@ function isValid(name) {
   // }
 
   return Boolean(name) && !name.includes(' ') && name.length >= 4;
+
+
   
 }
 
