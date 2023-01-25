@@ -8,4 +8,5 @@ function filterRange(arr, a, b) {
   // return newArr;
 
   return arr.filter(el => (el >= a) && (el <= b));
+  
 }
