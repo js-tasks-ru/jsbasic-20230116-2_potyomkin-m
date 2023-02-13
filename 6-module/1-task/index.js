@@ -13,11 +13,12 @@
  *
  */
 export default class UserTable {
-  elem = null;
+
+  _container = null;
   
   constructor(rows) {
    
-    let tbl = document.createElement('table');
+    this._container = document.createElement('table');
    
     let inner = `
     <thead>
@@ -42,20 +43,22 @@ export default class UserTable {
 
     inner += `</tbody>`;
 
-    tbl.innerHTML = inner;
+    this._container.innerHTML = inner;
     
-    this.elem = tbl;
-
-    const buttons = tbl.querySelectorAll('button');
+    const buttons = this._container.querySelectorAll('button');
     
     buttons.forEach(button => {
-      button.addEventListener('click', this.#onButtonClick);
+      button.addEventListener('click', this._onButtonClick);
     });
 
     
   }
-  #onButtonClick = (e) => {
+  _onButtonClick = (e) => {
     e.target.closest('tr').remove();
+  }
+
+  get elem() {
+    return this._container;
   }
 
 }
