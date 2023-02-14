@@ -127,7 +127,7 @@ export default class RibbonMenu {
     const categoryEvent = new CustomEvent('ribbon-select', { // имя события должно быть именно 'ribbon-select'
       detail: e.target.closest('.ribbon__item').dataset.id, // уникальный идентификатора категории из её объекта
       bubbles: true // это событие всплывает - это понадобится в дальнейшем
-    })
+    });
 
     this.elem.dispatchEvent(categoryEvent);
   }
