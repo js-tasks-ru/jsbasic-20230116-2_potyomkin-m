@@ -26,8 +26,8 @@ export default class Carousel {
         <div class="carousel__inner" >`;
 
     slides.forEach(slide => {
-      carousel +=`
-        <div class="carousel__slide" data-id="penang-shrimp">
+      carousel += `
+        <div class="carousel__slide" data-id="${slide.id}">
           <img src="/assets/images/carousel/${slide.image}" class="carousel__img" alt="slide">
           <div class="carousel__caption">
             <span class="carousel__price">€${slide.price.toFixed(2)}</span>
