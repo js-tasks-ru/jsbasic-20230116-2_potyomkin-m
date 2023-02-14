@@ -39,7 +39,7 @@ export default class RibbonMenu {
       arrow.addEventListener('click', this._onRibbonArrowsClick);
     });
     
-
+    // сперва сделал функцию, а потом понял, что она вроде и не нужна. 
     // this._ribbonArrowsVisibility('hideLeft');
     // this._ribbonArrowsVisibility('showRight');
 
@@ -63,51 +63,65 @@ export default class RibbonMenu {
     ribbonInner.addEventListener('scroll', (e) => {
 
       if (e.target.scrollWidth === e.target.scrollLeft + e.target.clientWidth) {
-        this._ribbonArrowsVisibility('hideRight');
+        // this._ribbonArrowsVisibility('hideRight');
+        this._container.querySelector('.ribbon__arrow_right').classList.remove('ribbon__arrow_visible');
       } else {
-        this._ribbonArrowsVisibility('showRight');
+        // this._ribbonArrowsVisibility('showRight');
+        this._container.querySelector('.ribbon__arrow_right').classList.add('ribbon__arrow_visible');
       }
       
       if (e.target.scrollLeft === 0) {
-        this._ribbonArrowsVisibility('hideLeft');
+        // this._ribbonArrowsVisibility('hideLeft');
+        this._container.querySelector('.ribbon__arrow_left').classList.remove('ribbon__arrow_visible');
       } else {
-        this._ribbonArrowsVisibility('showLeft');
+        // this._ribbonArrowsVisibility('showLeft');
+        this._container.querySelector('.ribbon__arrow_left').classList.add('ribbon__arrow_visible');
+
       }
     });
   }
 
-  _ribbonArrowsVisibility = (a) => {
-    switch (a) {
-    case 'showLeft':
-      this._container.querySelector('.ribbon__arrow_left').classList.add('ribbon__arrow_visible');
-      break;
+  // _ribbonArrowsVisibility = (a) => {
+  //   switch (a) {
+  //   case 'showLeft':
+  //     this._container.querySelector('.ribbon__arrow_left').classList.add('ribbon__arrow_visible');
+  //     break;
 
-    case 'showRight':
-      this._container.querySelector('.ribbon__arrow_right').classList.add('ribbon__arrow_visible');
-      break;
+  //   case 'showRight':
+  //     this._container.querySelector('.ribbon__arrow_right').classList.add('ribbon__arrow_visible');
+  //     break;
     
-    case 'hideLeft':
-      this._container.querySelector('.ribbon__arrow_left').classList.remove('ribbon__arrow_visible');
-      break;
+  //   case 'hideLeft':
+  //     this._container.querySelector('.ribbon__arrow_left').classList.remove('ribbon__arrow_visible');
+  //     break;
 
-    case 'hideRight':
-      this._container.querySelector('.ribbon__arrow_right').classList.remove('ribbon__arrow_visible');
-      break;
+  //   case 'hideRight':
+  //     this._container.querySelector('.ribbon__arrow_right').classList.remove('ribbon__arrow_visible');
+  //     break;
 
-    default:
-      break;
-    }
-  };
+  //   default:
+  //     break;
+  //   }
+  // };
 
 
   _onRibbonItemClick = (e) => {
     e.preventDefault();
-    
-    const links = this._container.querySelectorAll('.ribbon__inner .ribbon__item');
 
-    links.forEach(link => {
-      link.classList.remove('ribbon__item_active');
-    });
+    // работает и forEach и просто проверка на наличие класса. 
+    // не понятно, что лучше использовать
+    
+    // const links = this._container.querySelectorAll('.ribbon__inner .ribbon__item');
+    // links.forEach(link => {
+    //   link.classList.remove('ribbon__item_active');
+    // });
+
+    const active = document.querySelector('.ribbon__item_active');
+    if (active) {
+      active.classList.remove('ribbon__item_active');
+    }
+
+
     e.target.closest('.ribbon__item').classList.add('ribbon__item_active');
 
     const categoryEvent = new CustomEvent('ribbon-select', { // имя события должно быть именно 'ribbon-select'
