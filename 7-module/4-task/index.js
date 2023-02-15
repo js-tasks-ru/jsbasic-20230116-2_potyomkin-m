@@ -85,6 +85,8 @@ export default class StepSlider {
   _onDown = () => {
     this.elem.classList.add('slider_dragging');
     
+    this.tmpValue = this.value;
+    
     document.addEventListener('pointermove', this._onMove);
 
     const { width } = this._thumb.getBoundingClientRect();
@@ -96,6 +98,8 @@ export default class StepSlider {
 
 
   _onMove = ({ pageX }) => {
+
+    
 
     const width = this._container.querySelector('.slider__steps').getBoundingClientRect().width;
     const position = this._container.querySelector('.slider__steps').getBoundingClientRect().left;
@@ -116,7 +120,9 @@ export default class StepSlider {
 
     this._sliderMove(this._sliderPosition(this.value));
 
-    this._sliderCustomEvent();
+    if (this.tmpValue !== this.value) {
+      this._sliderCustomEvent();
+    }
 
     document.removeEventListener('pointermove', this._onMove);
     this.elem.classList.remove('slider_dragging');
