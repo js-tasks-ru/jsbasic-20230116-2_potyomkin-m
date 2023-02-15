@@ -2,7 +2,7 @@ import createElement from '../../assets/lib/create-element.js';
 
 
 export default class StepSlider {
-  constructor({ steps, value = 0 }) {
+  constructor({ steps, value = 3 }) {
     this.value = value;
     this.steps = steps;
     let slider = `
@@ -16,7 +16,7 @@ export default class StepSlider {
 
         <div class="slider__steps">
           `;
-    for (let index = 0; index < steps; index++) {      
+    for (let index = 0; index < steps; index++) {
       slider += `<span></span>`;
     }
     slider += `
@@ -25,25 +25,33 @@ export default class StepSlider {
     `;
 
     this._container = createElement(slider);
-    
-    this._moveSlider(this.value);
 
-    this._container.addEventListener('click', this._onSliderClick);
+    this._sliderMove(this._sliderPosition(this.value));
+
+    this.elem.addEventListener('click', this._onSliderClick);
 
   }
 
+
   _onSliderClick = (e) => {
-    //вычисляем ширину контейнера и и текушую позицию курсора при клике
-    const width = this._container.querySelector('.slider__steps').getBoundingClientRect().width;
-    const position = this._container.querySelector('.slider__steps').getBoundingClientRect().left;
+    // вычисляем ширину контейнера и и текушую позицию курсора при клике
+    const width = this.elem.querySelector('.slider__steps').getBoundingClientRect().width;
+    const position = this.elem.querySelector('.slider__steps').getBoundingClientRect().left;
 
     //вычисляем к какому элементу ближе всего
-    this.value = Math.round((e.pageX - position) / (width / (this.steps - 1)));
+    const tmpValue = Math.round((e.pageX - position) / (width / (this.steps - 1)));
 
-    //вызываем функцию передвигающую слайдер
-    this._moveSlider(this.value);
+    if (tmpValue !== this.value) {
+      this.value = tmpValue;
+
+      //вызываем функцию передвигающую слайдер
+      this._sliderMove(this._sliderPosition(this.value));
+      this._sliderCustomEvent();
+    }
+  }
 
 
+  _sliderCustomEvent() {
     const sliderEvent = new CustomEvent('slider-change', { // имя события должно быть именно 'ribbon-select'
       detail: this.value, // уникальный идентификатора категории из её объекта
       bubbles: true // это событие всплывает - это понадобится в дальнейшем
@@ -52,7 +60,23 @@ export default class StepSlider {
     this.elem.dispatchEvent(sliderEvent);
   }
 
-  _moveSlider = (value) => {
+
+  _sliderPosition(value) {
+    return 100 * value / (this.steps - 1);
+  }
+
+
+  _sliderMove = (sliderPosition) => {
+    this.elem.querySelector('.slider__thumb').style.left = `${sliderPosition}%`;
+    this.elem.querySelector('.slider__progress').style.width = `${sliderPosition}%`;
+    this._updateSlider();
+  }
+
+
+  _updateSlider() {
+
+    this.elem.querySelector('.slider__value').innerHTML = this.value;
+
     //убираем активный span у всех
     const spans = this._container.querySelectorAll('.slider__steps span');
     spans.forEach(span => {
@@ -60,18 +84,10 @@ export default class StepSlider {
     });
 
     // Добавляем активный span
-    spans[value].classList.add('slider__step-active');
+    spans[this.value].classList.add('slider__step-active');
 
-    //меняем число в ползунке
-    this._container.querySelector('.slider__value').innerHTML = value;
-
-    //вычисляем на сколько нужно двинуть ползунок в % и двигаем
-    let position = this.value * 100 / (this.steps - 1);
-    this._container.querySelector('.slider__thumb').style.left = position + '%';
-
-    //закрашиваем прогресс
-    this._container.querySelector('.slider__progress').style.width = position + '%';
   }
+
 
   get elem() {
     return this._container;
