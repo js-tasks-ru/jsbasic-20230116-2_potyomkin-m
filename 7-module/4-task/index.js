@@ -2,7 +2,7 @@ import createElement from '../../assets/lib/create-element.js';
 
 
 export default class StepSlider {
-  constructor({ steps, value = 0 }) {
+  constructor({ steps, value = 3 }) {
     this.value = value;
     this.steps = steps;
     let slider = `
@@ -19,6 +19,7 @@ export default class StepSlider {
     for (let index = 0; index < steps; index++) {
       slider += `<span></span>`;
     }
+    
     slider += `
         </div>
       </div>
@@ -85,7 +86,8 @@ export default class StepSlider {
   _onDown = () => {
     this.elem.classList.add('slider_dragging');
     
-    this.tmpValue = this.value;
+    //устанавлиавем значение на момент начала drag и в ~124 строке сравниваем - появились ли изменения
+    this.tmpValue = this.value; 
     
     document.addEventListener('pointermove', this._onMove);
 
@@ -98,8 +100,6 @@ export default class StepSlider {
 
 
   _onMove = ({ pageX }) => {
-
-    
 
     const width = this._container.querySelector('.slider__steps').getBoundingClientRect().width;
     const position = this._container.querySelector('.slider__steps').getBoundingClientRect().left;
