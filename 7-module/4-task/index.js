@@ -46,7 +46,7 @@ export default class StepSlider {
     //вычисляем к какому элементу ближе всего
     const tmpValue = Math.round((e.pageX - position) / (width / (this.steps - 1)));
 
-    if (tmpValue !== this.value ) {
+    if (tmpValue !== this.value) {
       this.value = tmpValue;
       
       //вызываем функцию передвигающую слайдер
