@@ -4,13 +4,11 @@ import ProductCard from '../../6-module/2-task/index.js';
 export default class ProductGrid {
 
   _newFilters = {
-    
+    category: ''
   };
   constructor(products) {
     this.products = products;
-    this.filters = {
-      category: ''
-    };
+    this.filters = {};
 
 
 
