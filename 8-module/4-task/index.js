@@ -165,10 +165,11 @@ export default class Cart {
     let count;
     if (e.target.closest('.cart-counter__button').classList.contains('cart-counter__button_plus')) {
       count = 1;
-    };
+    }
+    
     if (e.target.closest('.cart-counter__button').classList.contains('cart-counter__button_minus')) {
       count = -1;
-    };
+    }
 
     this.updateProductCount(productId, count);
 
