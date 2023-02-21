@@ -28,6 +28,9 @@ export default class RibbonMenu {
 
     this._container = createElement(ribbon);
 
+    //не совсем элегантно, зато про футбол
+    this._container.querySelectorAll('.ribbon__item ')[0].classList.add('ribbon__item_active');
+
     const arrows = this._container.querySelectorAll('.ribbon__arrow');
 
     arrows.forEach(arrow => {

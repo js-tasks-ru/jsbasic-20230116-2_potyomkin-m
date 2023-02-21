@@ -15,6 +15,7 @@ export default class Cart {
 
 
   addProduct(product) {
+
     if (!product) { return; }
     let isPresent = false;
     const newCartItem = { 'product': product, 'count': 1 };
@@ -142,8 +143,10 @@ export default class Cart {
     this._modalBody = document.createElement('div');
 
     this.cartItems.forEach(cartItem => {
+      
       this._modalBody.append(this.renderProduct(cartItem.product, cartItem.count));
     });
+
     
     this._modalBody.append(this.renderOrderForm());
     this._modal.setBody(this._modalBody);
