@@ -42,7 +42,9 @@ export default class ProductGrid {
     this._newFilters.vegeterianOnly = (typeof (filters.vegeterianOnly) !== 'undefined') ? filters.vegeterianOnly : this._newFilters.vegeterianOnly;
     this._newFilters.maxSpiciness = (typeof (filters.maxSpiciness) !== 'undefined') ? filters.maxSpiciness : this._newFilters.maxSpiciness;
     this._newFilters.category = (typeof (filters.category) !== 'undefined') ? filters.category : this._newFilters.category;
+    // this._newFilters = Object.assign(this._newFilters, filters);
 
+    console.log(this._newFilters);
 
     // console.log(this._newFilters, filters);
 
