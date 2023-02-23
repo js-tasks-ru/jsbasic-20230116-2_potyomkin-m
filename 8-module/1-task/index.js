@@ -55,6 +55,15 @@ export default class CartIcon {
     //   TypeError: Cannot read properties of null(reading 'getBoundingClientRect')
     //     at CartIcon.updatePosition(8 - module / 1 - task / index.js: 47: 43)
     //     at HTMLDocument.< anonymous > (8 - module / 1 - task / index.js: 37: 52)
+
+
+    // let containerRight;
+    // try {
+    //   containerRight = document.querySelector('.container').getBoundingClientRect().right + 20
+    // } catch (error) {
+    //   containerRight = 0;
+    // }
+    
     const containerRight = document.querySelector('.container') ? document.querySelector('.container').getBoundingClientRect().right + 20 : 0;
     
 
